@@ -11,15 +11,25 @@ public static class ArraySelector
 
     private static int[] ListSelector(int[] list1, int[] list2, int[] select)
     {
-        List<int> combined = new List<int>();
-        for (var i = 0; i < list1.Length; i++)
-        {
+        
+        List<int> combined = new List<int>(); // New combined array
+        int index1 = 0; // Starting indexes
+        int index2 = 0; // Starting indexes
 
-        }
-        for (var i = 0; i < list2.Length; i++)
+        for (var i = 0; i < select.Length; i++)
         {
-
+            if (select[i] == 1)
+            {
+                combined.Add(list1[index1]);
+                index1++;
+            }
+            if (select[i] == 2)
+            {
+                combined.Add(list2[index2]);
+                index2++;
+            }
         }
-        return [];
+
+        return combined.ToArray(); // Remember to convert a list into a array by using ".ToArray"
     }
 }

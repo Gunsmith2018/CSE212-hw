@@ -13,7 +13,17 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return []; // replace this return statement with your own
+        /* MultiplesOf(x,y)
+        X is going to be the number multiplied and Y is going to be how many times we multiply it. 
+        so if X is 3, and y is 5, 3 will be multiplied by: 1, 2, 3, 4, 5. A for loop will be used.
+        */
+
+        var results = new double[length];
+        for(int i =0; i < length; i++)
+        {
+            results[i] = number * (i = +1);
+        }
+        return results; // replace this return statement with your own
     }
 
     /// <summary>
@@ -29,5 +39,17 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+        /*
+        In writing this is simple. Take three numbers from the end of a list, remove them, push the remaining
+        numbers over three places, then insert the three removed in the front.
+
+
+        */
+
+        var lastThree = data.GetRange(data.Count - amount, amount); // locates the end of an array
+        data.RemoveRange(data.Count - amount, amount); // removes from the array
+        data.InsertRange(0, lastThree); // places in the beguinning of the array
+        
     }
 }
