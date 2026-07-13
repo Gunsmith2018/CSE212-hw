@@ -1,3 +1,4 @@
+using System.IO;
 /// <summary>
 /// This queue is circular.  When people are added via AddPerson, then they are added to the 
 /// back of the queue (per FIFO rules).  When GetNextPerson is called, the next person
@@ -18,7 +19,7 @@ public class TakingTurnsQueue
     /// </summary>
     /// <param name="name">Name of the person</param>
     /// <param name="turns">Number of turns remaining</param>
-    public void AddPerson(string name, int turns)
+    public void AddPerson(string name, int turns) // Needed
     {
         var person = new Person(name, turns);
         _people.Enqueue(person);
@@ -31,23 +32,30 @@ public class TakingTurnsQueue
     /// person has an infinite number of turns.  An error exception is thrown 
     /// if the queue is empty.
     /// </summary>
-    public Person GetNextPerson()
+    public Person GetNextPerson() // Needed
     {
         if (_people.IsEmpty())
         {
             throw new InvalidOperationException("No one in the queue.");
         }
-        else
-        {
-            Person person = _people.Dequeue();
-            if (person.Turns > 1)
-            {
-                person.Turns -= 1;
-                _people.Enqueue(person);
-            }
 
-            return person;
+        Person p = _people.Dequeue();
+
+        if (p.Turns > 1) // greater than 1, requeue
+        {
+            p.Turns--;
+            _people.Enqueue(p);
         }
+        else if(p.Turns == 1)
+        {
+            // Perosn is out of turns and should be dequeued.
+        }
+
+        else if (p.Turns <= 0) // less than or equal to 0, infinate turns
+        {
+            _people.Enqueue(p);
+        }
+        return p;
     }
 
     public override string ToString()

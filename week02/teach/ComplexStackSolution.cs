@@ -8,7 +8,7 @@
         // False ....missing closing ')' (stack had an extra '(' in it at the end when it was supposed to be empty
         //                 here -------\/
         Console.WriteLine(CheckBraces("(robot[id + 1].Execute(.Pass() || (!robot[id * (2 + i)].Alive && stormy) || (robot[id - 1].Alive && lavaFlowing))"));
-    }
+    }                                                                // missing here
 
     public static bool CheckBraces(string line) {
         var stack = new Stack<char>();
