@@ -42,6 +42,6 @@ public class Translator
             {
             newWord = _words[fromWord];
             }
-        return "???";
+        return newWord;
     }
 }
