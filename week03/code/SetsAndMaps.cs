@@ -22,7 +22,19 @@ public static class SetsAndMaps
     public static string[] FindPairs(string[] words)
     {
         // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+        // Similarl to the Duplicate Learning activity but this will be checking reverse characters for matches
+
+        var pairs = new HashSet<string>();
+        var results = new List<string>();
+        foreach (var word in words)
+        {
+            var reversed = new string(word.Reverse().ToArray()); // reverses the string
+            if (pairs.Contains(reversed)) // checking if there are pairs from reversed string
+                results.Add(word + " - " + reversed); // might be causing the test to fail
+            
+            pairs.Add(word);
+        }
+        return results.ToArray();
     }
 
     /// <summary>
@@ -41,8 +53,19 @@ public static class SetsAndMaps
         var degrees = new Dictionary<string, int>();
         foreach (var line in File.ReadLines(filename))
         {
-            var fields = line.Split(",");
+            var fields = line.Split(","); // This variable is important
             // TODO Problem 2 - ADD YOUR CODE HERE
+            var degree = fields[3].Trim(); // KEY
+            
+            if (degrees.ContainsKey(degree)) //checking if degree has been spotted before
+            {
+                degrees[degree]++; // adds to if degree has been spotted
+            }
+            else
+            {
+                degrees[degree] = 1; // adds new if degree didn't excist
+            }
+            
         }
 
         return degrees;
@@ -67,7 +90,53 @@ public static class SetsAndMaps
     public static bool IsAnagram(string word1, string word2)
     {
         // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+
+        // cleaning up the strings
+        string cleanWord1 = word1.Replace(" ", "").ToLower();
+        string cleanWord2 = word2.Replace(" ", "").ToLower();
+        //Dictionary
+        var anagram = new Dictionary<char, int>();
+        var anagram2 = new Dictionary<char, int>();
+        // One foreach loops for each string
+        foreach (char word in cleanWord1)
+        {
+            if (anagram.ContainsKey(word))
+            {
+                anagram[word]++; // Increments
+            }
+            else
+            {
+                anagram[word]=1; //Initialize to 1
+            }
+        }
+        foreach (char word in cleanWord2)
+        {
+            if (anagram2.ContainsKey(word))
+            {
+                anagram2[word]++; // Increments
+            }
+            else
+            {
+                anagram2[word] = 1; //Initialize to 1
+            }
+        }
+        if (anagram.Count != anagram2.Count)
+        {
+            return false;
+        }
+        foreach (char letter in anagram.Keys)
+        {
+            if (!anagram2.ContainsKey(letter))
+            {
+                return false;
+            }
+            if (anagram[letter] != anagram2[letter])
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /// <summary>
@@ -101,6 +170,21 @@ public static class SetsAndMaps
         // on those classes so that the call to Deserialize above works properly.
         // 2. Add code below to create a string out each place a earthquake has happened today and its magitude.
         // 3. Return an array of these string descriptions.
-        return [];
+
+        var details = new List<string>(); // Used for holding string info
+        foreach(var i in featureCollection.Features) // used for accessing and then storing data to var details
+        {
+            if (i.properties != null) // if properties is not null run inside
+            {
+                string place = i.properties.place;
+                double magitude = i.properties.mag;
+
+                details.Add($"Location: {place} - Magitude: {magitude}");
+            }
+            
+        }
+        return details.ToArray();
+
     }
+
 }
