@@ -34,9 +34,9 @@ public class Maze
     {
         // FILL IN CODE
         var direction = _mazeMap[(_currX, _currY)];
-        if (!direction[0])
+        if (!direction[0] || !_mazeMap[(_currX, _currY)][2])
         {
-            throw new InvalidOperationException("Can't Go that way!");
+            throw new InvalidOperationException("Can't go that way!");
         }
         _currX--;
     }
@@ -49,9 +49,9 @@ public class Maze
     {
         // FILL IN CODE
         var direction = _mazeMap[(_currX, _currY)];
-        if (!direction[1])
+        if (!direction[1]|| !_mazeMap[(_currX, _currY)][3])
         {
-            throw new InvalidOperationException("Can't Go that way!");
+            throw new InvalidOperationException("Can't go that way!");
         }
         _currX--;
     }
@@ -64,9 +64,9 @@ public class Maze
     {
         // FILL IN CODE
         var direction = _mazeMap[(_currX, _currY)];
-        if (!direction[2])
+        if (!direction[2] || !_mazeMap[(_currX, _currY)][0])
         {
-            throw new InvalidOperationException("Can't Go that way!");
+            throw new InvalidOperationException("Can't go that way!");
         }
         _currX--;
     }
@@ -79,9 +79,9 @@ public class Maze
     {
         // FILL IN CODE
         var direction = _mazeMap[(_currX, _currY)];
-        if (!direction[3])
+        if (!direction[3]|| !_mazeMap[(_currX, _currY)][1])
         {
-            throw new InvalidOperationException("Can't Go that way!");
+            throw new InvalidOperationException("Can't go that way!");
         }
         _currX--;
     }

@@ -24,17 +24,23 @@ public static class SetsAndMaps
         // TODO Problem 1 - ADD YOUR CODE HERE
         // Similarl to the Duplicate Learning activity but this will be checking reverse characters for matches
 
-        var pairs = new HashSet<string>();
+        var seen = new HashSet<string>();
         var results = new List<string>();
+
         foreach (var word in words)
         {
-            var reversed = new string(word.Reverse().ToArray()); // reverses the string
-            if (pairs.Contains(reversed)) // checking if there are pairs from reversed string
-                results.Add(word + " - " + reversed); // might be causing the test to fail
-            
-            pairs.Add(word);
+            string reversed = new string(word.Reverse().ToArray()); // reverses the string
+
+            if (word == reversed) // checking if there are pairs from reversed string
+                continue;
+
+            if (seen.Contains(reversed))
+            {
+                results.Add($"{word} & {reversed}"); // spaces needed for formatting
+            }
+            seen.Add(word); //
         }
-        return results.ToArray();
+        return results.ToArray(); // adds found "word" to words
     }
 
     /// <summary>
@@ -177,9 +183,9 @@ public static class SetsAndMaps
             if (i.properties != null) // if properties is not null run inside
             {
                 string place = i.properties.place;
-                double magitude = i.properties.mag;
+                double? Magnitude = i.properties.mag;
 
-                details.Add($"Location: {place} - Magitude: {magitude}");
+                details.Add($"{place} - Mag {Magnitude}");
             }
             
         }
