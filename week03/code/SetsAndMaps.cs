@@ -29,7 +29,9 @@ public static class SetsAndMaps
 
         foreach (var word in words)
         {
-            string reversed = new string(word.Reverse().ToArray()); // reverses the string
+            char[] chars = word.ToCharArray();
+            Array.Reverse(chars);
+            string reversed = new string(chars); // reverses the string
 
             if (word == reversed) // checking if there are pairs from reversed string
                 continue;
