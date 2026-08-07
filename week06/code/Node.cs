@@ -13,6 +13,11 @@ public class Node
     {
         // TODO Start Problem 1
 
+        // Checks for duplicates and stops them 
+        if (value == Data)
+        {
+            return;
+        }
         if (value < Data)
         {
             // Insert to the left
@@ -34,12 +39,51 @@ public class Node
     public bool Contains(int value)
     {
         // TODO Start Problem 2
-        return false;
+
+        if (value == Data) 
+            return true;
+
+        if (value < Data) // if value is less than data
+        {
+            if (Left == null) // check if Left is empty
+            {
+                return false;
+            }
+            return Left.Contains(value);
+        }
+        else
+        {
+            if (Right is null) // check if Right is empty
+            {
+                return false;
+            }
+            return Right.Contains(value);
+        }
     }
 
     public int GetHeight()
     {
         // TODO Start Problem 4
-        return 0; // Replace this line with the correct return statement(s)
+        int left;
+        if (Left is null)
+        {
+            left = 0;
+        }
+        else
+        {
+            left = Left.GetHeight();
+        }
+
+        int right;
+        if (Right is null)
+        {
+            right = 0;
+
+        }
+        else
+        {
+            right = Right.GetHeight();
+        }
+        return 1 + Math.Max(left, right); 
     }
 }
